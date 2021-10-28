@@ -8,32 +8,38 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
-  "globals": {
-    "__DEV__": "readonly"
-  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": "latest",
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": [
     "react",
     "@typescript-eslint",
     "react-hooks",
-    "prettier",
-    "eslint-plugin-import-helpers"
+    "eslint-plugin-import-helpers",
+    "prettier"
   ],
   "rules": {
+    "camelcase": "off",
+    "consistent-return": "off",
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "import/no-useless-path-segments": "off",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [
       1,
       {
         "extensions": [
-          ".tsx"
+          ".tsx",
+          ".js",
+          ".ts"
         ]
       }
     ],
@@ -47,7 +53,8 @@
       "ignorePackages",
       {
         "ts": "never",
-        "tsx": "never"
+        "tsx": "never",
+        "js": "never"
       }
     ],
     "import-helpers/order-imports": [
