@@ -8,7 +8,6 @@ export const Container = styled.View`
   border-bottom-style: solid;
   border-bottom-color: #e3e3e3;
   box-shadow: ${scale(2)}px ${scale(2)}px ${scale(4)}px rgba(0, 0, 0, 0.25);
-  elevation: 4;
 `;
 
 export const Title = styled.Text`
@@ -17,7 +16,9 @@ export const Title = styled.Text`
   color: #303030;
 `;
 
-export const FooterContainer = styled.View``;
+export const FooterContainer = styled.View`
+  margin: ${scale(21)}px;
+`;
 
 export const Icon = styled(MaterialCommunityIcon).attrs({
   size: scale(21),

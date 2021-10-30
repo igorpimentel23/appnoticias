@@ -33,11 +33,12 @@ export const Container = styled.View<ContainerProps>`
     `}
 `;
 
-export const TextInput = styled.TextInput`
+export const TextInput = styled.TextInput<{ isTextArea: boolean }>`
   flex: 1;
   color: #303030;
   font-size: ${scale(14)}px;
   height: 100%;
+  text-align-vertical: ${props => (props.isTextArea ? 'top' : 'center')};
 `;
 
 export const Icon = styled(MaterialCommunityIcons)<{ isTextArea: boolean }>`

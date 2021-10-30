@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigation } from '@react-navigation/native';
+import { Platform } from 'react-native';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -8,8 +10,8 @@ import Button from '../../components/Button';
 import { Input } from '../../components/Input';
 import { api } from '../../services/api';
 
-import { Container, Title, Icon } from './styles';
-import { useNavigation } from '@react-navigation/native';
+import { Container, Title, Icon, Wrapper } from './styles';
+import { scale } from 'react-native-size-matters';
 
 type IInputs = {
   title: string;
@@ -76,48 +78,53 @@ export const CreatePost: React.FC = () => {
   }, [register]);
 
   return (
-    <Container>
-      <Title>
-        <Icon name="file-document-edit-outline" /> Criar notícia
-      </Title>
-      <Input
-        value={titleVal}
-        icon="format-title"
-        placeholder="Digite o título da notícia"
-        onChangeText={text => {
-          setValue('title', text);
-          setTitleVal(text);
-        }}
-        error={errors?.title}
-        returnKeyType="next"
-      />
-      <Input
-        value={textVal}
-        type="area"
-        icon="form-textarea"
-        placeholder="Digite o texto"
-        onChangeText={text => {
-          setValue('text', text);
-          setTextVal(text);
-        }}
-        error={errors?.text}
-        returnKeyType="default"
-      />
-      <Input
-        value={authorVal}
-        icon="account"
-        placeholder="Digite o nome do autor"
-        onChangeText={text => {
-          setValue('author', text);
-          setAuthorVal(text);
-        }}
-        error={errors?.author}
-        returnKeyType="send"
-        onSubmitEditing={handleSubmit(onSubmit)}
-      />
-      <Button disabled={isSubmitting} onPress={handleSubmit(onSubmit)}>
-        Enviar
-      </Button>
+    <Container
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+    >
+      <Wrapper showsVerticalScrollIndicator={false}>
+        <Title>
+          <Icon name="file-document-edit-outline" /> Criar notícia
+        </Title>
+        <Input
+          value={titleVal}
+          icon="format-title"
+          placeholder="Digite o título da notícia"
+          onChangeText={text => {
+            setValue('title', text);
+            setTitleVal(text);
+          }}
+          error={errors?.title}
+          returnKeyType="next"
+        />
+        <Input
+          value={textVal}
+          type="area"
+          icon="form-textarea"
+          placeholder="Digite o texto"
+          onChangeText={text => {
+            setValue('text', text);
+            setTextVal(text);
+          }}
+          error={errors?.text}
+          returnKeyType="default"
+        />
+        <Input
+          value={authorVal}
+          icon="account"
+          placeholder="Digite o nome do autor"
+          onChangeText={text => {
+            setValue('author', text);
+            setAuthorVal(text);
+          }}
+          error={errors?.author}
+          returnKeyType="send"
+          onSubmitEditing={handleSubmit(onSubmit)}
+        />
+        <Button disabled={isSubmitting} onPress={handleSubmit(onSubmit)}>
+          Enviar
+        </Button>
+      </Wrapper>
     </Container>
   );
 };
