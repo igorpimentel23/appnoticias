@@ -5,8 +5,7 @@ export const Container = styled.TouchableOpacity`
   border: 1px solid #e3e3e3;
   border-radius: ${scale(8)}px;
   padding: ${scale(8)}px;
-  box-shadow: ${scale(2)}px ${scale(2)}px ${scale(4)}px rgba(0, 0, 0, 0.25);
-  elevation: 4;
+  box-shadow: ${scale(0)}px ${scale(2)}px ${scale(4)}px rgba(0, 0, 0, 0.25);
   margin: ${scale(5)}px ${scale(10)}px;
 `;
 

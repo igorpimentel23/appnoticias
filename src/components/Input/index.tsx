@@ -68,6 +68,7 @@ export const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = ({
           }
         />
         <TextInput
+          isTextArea={type === 'area'}
           ref={inputElementRef}
           keyboardAppearance="dark"
           placeholderTextColor="#666060"
