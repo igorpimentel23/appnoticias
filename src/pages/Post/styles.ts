@@ -1,13 +1,15 @@
 import { scale } from 'react-native-size-matters';
 import styled from 'styled-components/native';
 
-export const Container = styled.TouchableOpacity`
-  border: 1px solid #e3e3e3;
-  border-radius: ${scale(8)}px;
-  padding: ${scale(8)}px;
-  box-shadow: ${scale(2)}px ${scale(2)}px ${scale(4)}px rgba(0, 0, 0, 0.25);
-  elevation: 4;
-  margin: ${scale(5)}px ${scale(10)}px;
+export const Container = styled.View`
+  flex: 1;
+  padding: ${scale(10)}px;
+`;
+
+export const LoadingContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 `;
 
 export const Title = styled.Text`
@@ -29,3 +31,9 @@ export const TextAuthor = styled.Text`
 export const TextDate = styled.Text`
   color: #303030;
 `;
+
+export const TitleContainer = styled.View``;
+
+export const TextContainer = styled.View``;
+
+export const FooterContainer = styled.View``;

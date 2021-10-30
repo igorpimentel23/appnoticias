@@ -10,11 +10,16 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.2",
     "@react-navigation/material-bottom-tabs": "^6.0.9",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
+    "@unform/core": "^2.1.6",
+    "@unform/mobile": "^2.1.6",
     "axios": "^0.24.0",
+    "date-fns": "^2.25.0",
     "react": "17.0.2",
+    "react-hook-form": "^7.18.0",
     "react-native": "0.66.1",
     "react-native-config": "^1.4.5",
     "react-native-gesture-handler": "^1.10.3",
@@ -22,7 +27,8 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-size-matters": "^0.4.0",
     "react-native-vector-icons": "^9.0.0",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
