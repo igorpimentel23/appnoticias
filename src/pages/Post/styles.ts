@@ -37,3 +37,13 @@ export const TitleContainer = styled.View``;
 export const TextContainer = styled.View``;
 
 export const FooterContainer = styled.View``;
+
+export const ButtonsContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: ${scale(20)}px;
+`;
+
+export const ButtonContainer = styled.View`
+  width: 48%;
+`;
