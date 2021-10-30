@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Platform } from 'react-native';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -12,11 +12,18 @@ import { api } from '../../services/api';
 
 import { Container, Title, Icon, Wrapper } from './styles';
 import { scale } from 'react-native-size-matters';
+import { IPost } from '../Home';
 
 type IInputs = {
   title: string;
   text: string;
   author: string;
+};
+
+type PostRouteProps = {
+  Post: {
+    post?: IPost;
+  };
 };
 
 const fieldValidationSchema = yup.object().shape({
@@ -36,20 +43,34 @@ export const CreatePost: React.FC = () => {
     resolver: yupResolver(fieldValidationSchema),
   });
   const navigation = useNavigation();
+  const { params } = useRoute<RouteProp<PostRouteProps, 'Post'>>();
+  const { post } = params || { post: false };
 
   const [titleVal, setTitleVal] = useState('');
   const [textVal, setTextVal] = useState('');
   const [authorVal, setAuthorVal] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleSubmitForm = useCallback(
     async ({ title, text, author }: IInputs) => {
+      let data = {} as IPost;
       try {
-        const { data } = await api.post('/news', {
-          title,
-          text,
-          author,
-          created_at: Date.now(),
-        });
+        if(isEditing) {
+          const response = await api.put(`/news/${post?.id}`, {
+            title,
+            text,
+            author,
+          });
+
+          data = response?.data
+        } else {
+          await api.post('/news', {
+            title,
+            text,
+            author,
+            created_at: Date.now(),
+          });
+        };
 
         reset({
           title: '',
@@ -61,7 +82,13 @@ export const CreatePost: React.FC = () => {
         setTextVal('');
         setAuthorVal('');
 
-        navigation.navigate('Home');
+        if(isEditing && post?.id) {
+          navigation.navigate('Post', {
+            editedPost: data,
+          });
+        } else {
+          navigation.navigate('Home');
+        };
       } catch (error) {
         console.error(error)
       }
@@ -70,6 +97,18 @@ export const CreatePost: React.FC = () => {
   );
 
   const onSubmit: SubmitHandler<IInputs> = data => handleSubmitForm(data);
+
+  useEffect(() => {
+    setIsEditing(!!post);
+    if (post) {
+      setTitleVal(post.title);
+      setTextVal(post.text);
+      setAuthorVal(post.author);
+      setValue('title', post.title)
+      setValue('text', post.text)
+      setValue('author', post.author)
+    }
+  }, [post])
 
   useEffect(() => {
     register('title');
@@ -84,7 +123,7 @@ export const CreatePost: React.FC = () => {
     >
       <Wrapper showsVerticalScrollIndicator={false}>
         <Title>
-          <Icon name="file-document-edit-outline" /> Criar notícia
+          <Icon name="file-document-edit-outline" /> {isEditing ? "Editar": "Criar"} notícia
         </Title>
         <Input
           value={titleVal}
@@ -122,7 +161,7 @@ export const CreatePost: React.FC = () => {
           onSubmitEditing={handleSubmit(onSubmit)}
         />
         <Button disabled={isSubmitting} onPress={handleSubmit(onSubmit)}>
-          Enviar
+          Salvar
         </Button>
       </Wrapper>
     </Container>

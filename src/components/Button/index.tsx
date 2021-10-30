@@ -8,14 +8,16 @@ import { Container, ButtonText } from './styles';
 interface ButtonProps extends RectButtonProperties {
   children: string;
   isLoading?: boolean;
+  isDelete?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
   isLoading = false,
+  isDelete = false,
   ...rest
 }) => (
-  <Container enabled={!isLoading} {...rest}>
+  <Container enabled={!isLoading} isDelete={isDelete} {...rest}>
     {!isLoading ? (
       <ButtonText>{children}</ButtonText>
     ) : (
