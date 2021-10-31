@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import { ActivityIndicator, FlatList } from 'react-native';
 import { debounce } from 'lodash';
 
@@ -40,6 +40,10 @@ export const Home: React.FC = () => {
   const [posts, setPosts] = useState([] as IPost[]);
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState('');
+
+  const flatListRef = useRef<FlatList<IPost>>(null);
+
+  useScrollToTop(flatListRef);
 
   const navigation = useNavigation();
 
@@ -119,6 +123,7 @@ export const Home: React.FC = () => {
         </LoadingContainer>
       ) : (
         <FlatList
+        ref={flatListRef}
         data={posts}
         keyExtractor={key => key.id}
         renderItem={({ item }) => <Card post={item} />}
