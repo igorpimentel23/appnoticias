@@ -7,7 +7,6 @@ export const Container = styled.View`
   border-bottom-width: ${scale(1)}px;
   border-bottom-style: solid;
   border-bottom-color: #e3e3e3;
-  box-shadow: ${scale(2)}px ${scale(2)}px ${scale(4)}px rgba(0, 0, 0, 0.25);
 `;
 
 export const Title = styled.Text`
@@ -29,3 +28,5 @@ export const LoadingContainer = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+export const SearchContainer = styled.View``;

@@ -1,9 +1,4 @@
-import React, {
-  useCallback,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import { FieldError } from 'react-hook-form';
 import { TextInputProps } from 'react-native';
@@ -15,7 +10,7 @@ interface InputProps extends TextInputProps {
   containerStyle?: object;
   filled?: boolean;
   focused?: boolean;
-  error: FieldError | undefined;
+  error?: FieldError | undefined;
   type?: 'input' | 'area';
   ref?: any | null;
 }
