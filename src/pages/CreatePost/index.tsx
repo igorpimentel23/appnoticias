@@ -38,7 +38,7 @@ export const CreatePost: React.FC = () => {
     handleSubmit,
     setValue,
     reset,
-    formState: { errors, isSubmitting, isSubmitted },
+    formState: { errors, isSubmitting },
   } = useForm<IInputs>({
     resolver: yupResolver(fieldValidationSchema),
   });
