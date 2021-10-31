@@ -41,6 +41,7 @@ export const Routes: React.FC = () => (
               color={color}
             />
           ),
+          title: 'Criar',
         }}
       />
     </Tab.Navigator>
